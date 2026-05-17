@@ -35,17 +35,66 @@ while true; do
     case "$user_input" in
 
         "help")
+            echo
             echo "help                                  :           Show this menu"
             echo "axon /start --agent-services          :           Start agent services"
             echo "axon /start --agent-mode webui        :           Run Agents in WebUI mode"
+            echo "axon /open -h                         :           Show the /open help menu"
             echo "help                                  :           Show this menu"
             echo "help                                  :           Show this menu"
             echo "help                                  :           Show this menu"
-            echo "help                                  :           Show this menu"
-            echo "help                                  :           Show this menu"
-
-
+            echo
             ;;
+
+        "axon /open -h")
+            echo
+            echo "axon /open -h                         :           Show this menu"
+            echo "axon /open .mail                      :           Opens the default mail application/website, configured in /configs/social/mail.axconf"
+            echo "axon /open .instagram                 :           Opens Instagram"
+            echo "axon /open .facebook                  :           Opens Facebook"
+            echo
+            ;;
+        
+        "axon /open .instagram")
+            echo
+            echo "Opening Instagram...."
+            echo
+
+            INSTAGRAM_LINK=$(grep "^site=" configs/social/instagram.axconf | cut -d'=' -f2-)
+
+            xdg-open "$INSTAGRAM_LINK" >/dev/null 2>&1 &
+
+        ;;
+
+        "axon /open dash.ui")
+            echo
+            echo "Opening DashboardUI...."
+            cd ui
+            python3 -m http.server
+            cd
+            echo
+
+            LIVE_SERVER=$(grep "^lveserver=" configs/dash/monc.axconf | cut -d'=' -f2-)
+
+            xdg-open "$LIVE_SERVER" >/dev/null 2>&1 &
+
+        ;;
+
+        "axon /run shortcuts.cl")
+            echo
+            echo "Running shortcuts.axcl"
+            cd ui
+            python3 -m http.server
+            cd
+            echo
+
+            LIVE_SERVER=$(grep "^lveserver=" configs/dash/monc.axconf | cut -d'=' -f2-)
+
+            xdg-open "$LIVE_SERVER" >/dev/null 2>&1 &
+
+        ;;
+
+
 
 "axon /start --agent-services")
     echo "Checking for system updates....."
