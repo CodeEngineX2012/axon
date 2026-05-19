@@ -96,7 +96,7 @@ while true; do
 
 
 
-"axon /start --agent-services")
+"axon /update")
     echo "Checking for system updates....."
 
     UPDATE_URL="https://axonagents.netlify.app/updates/latest/updates.axup"
